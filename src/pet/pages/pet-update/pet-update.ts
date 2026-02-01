@@ -1,4 +1,4 @@
-import {Component, inject, signal} from '@angular/core';
+import {Component, computed, effect, inject, input, signal} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {MessageService} from 'primeng/api';
 import {ButtonDirective, ButtonLabel} from 'primeng/button';
@@ -7,40 +7,54 @@ import {firstValueFrom} from 'rxjs';
 import {Router} from '@angular/router';
 import {getPetFormGroup} from '../../model/PetFormGroup';
 import {PetForm, PetFormControls} from '../../components/pet-form/pet-form';
+import {httpResource} from '@angular/common/http';
 
 interface MainFormControls {
   pet: FormGroup<PetFormControls>;
 }
 
 @Component({
-  selector: 'app-crud-create',
+  selector: 'app-crud-update',
   imports: [
     ReactiveFormsModule,
     ButtonDirective,
     ButtonLabel,
     PetForm
   ],
-  templateUrl: './pet-create.html'
+  templateUrl: './pet-update.html'
 })
-export class PetCreate {
+export class PetUpdate {
   messageService = inject(MessageService);
   fb = inject(FormBuilder);
   router = inject(Router);
   httpClient = inject(HttpClient);
+
+  id = input<string>();
+
+  pet = httpResource<Pet>(() => `/api/pets/${this.id()}`);
+  petValue = computed<Pet | undefined>(() => this.pet.hasValue() ? this.pet.value() : undefined);
 
   petForm: FormGroup<MainFormControls> = this.fb.nonNullable.group({
     pet: this.fb.nonNullable.group(getPetFormGroup())
   });
   formSubmitted = signal(false);
 
+  constructor() {
+    effect(() => {
+      if (this.pet.hasValue()) {
+        this.petForm.patchValue({ pet: this.petValue() });
+      }
+    });
+  }
+
   async onSubmit() {
     this.formSubmitted.set(true);
     if (this.petForm.valid) {
-      const response = await firstValueFrom(this.httpClient.post<Pet>('/api/pets', this.petForm.value.pet));
+      const response = await firstValueFrom(this.httpClient.put<Pet>(`/api/pets/${this.id()}`, this.petForm.value.pet));
       this.messageService.add({
         severity: 'success',
         summary: 'Success',
-        detail: `Pet with id ${response} created`,
+        detail: `Pet with id ${response} updated`,
         life: 3000
       });
       this.router.navigate(['/pet']);

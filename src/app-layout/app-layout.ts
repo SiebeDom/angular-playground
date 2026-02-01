@@ -3,12 +3,16 @@ import {NavigationEnd, Router, RouterLink} from '@angular/router';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {filter, map} from 'rxjs';
 import {Menu} from 'primeng/menu';
+import {ReactiveFormsModule} from '@angular/forms';
+import {Toast} from 'primeng/toast';
 
 @Component({
   selector: 'app-layout',
   imports: [
     RouterLink,
-    Menu
+    Menu,
+    ReactiveFormsModule,
+    Toast
 
   ],
   templateUrl: './app-layout.html',

@@ -2,7 +2,7 @@ import {Component, computed} from '@angular/core';
 import {TableModule} from 'primeng/table';
 import {httpResource} from '@angular/common/http';
 import {RouterLink} from '@angular/router';
-import {ButtonDirective, ButtonLabel} from 'primeng/button';
+import {Button, ButtonDirective, ButtonLabel} from 'primeng/button';
 
 @Component({
   selector: 'app-crud-list',
@@ -10,7 +10,8 @@ import {ButtonDirective, ButtonLabel} from 'primeng/button';
     TableModule,
     RouterLink,
     ButtonDirective,
-    ButtonLabel
+    ButtonLabel,
+    Button
   ],
   templateUrl: './pet-list.html'
 })

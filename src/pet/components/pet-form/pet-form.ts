@@ -1,4 +1,4 @@
-import {Component, input} from '@angular/core';
+import {Component, effect, input} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {InputText} from 'primeng/inputtext';
 import {Message} from 'primeng/message';
@@ -22,6 +22,12 @@ export class PetForm {
   petFormGroup = input.required<FormGroup<PetFormControls>>();
 
   formSubmitted = input<boolean>(false);
+
+  constructor() {
+    effect(() => {
+      console.log(this.petFormGroup().value.name);
+    });
+  }
 
   isInvalid(controlName: keyof PetFormControls) {
     const control = this.petFormGroup()?.get(controlName);
