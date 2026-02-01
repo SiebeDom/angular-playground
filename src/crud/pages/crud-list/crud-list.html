@@ -1,0 +1,19 @@
+<a routerLink="/crud/create">Create</a>
+<p-table [value]="petsValue()" [tableStyle]="{ 'min-width': '50rem' }">
+  <ng-template #header>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Mood</th>
+    </tr>
+  </ng-template>
+  <ng-template #body let-enterprise>
+    <tr>
+      <td>{{ enterprise.id }}</td>
+      <td>{{ enterprise.name }}</td>
+      <td>{{ enterprise.type }}</td>
+      <td>{{ enterprise.mood }}</td>
+    </tr>
+  </ng-template>
+</p-table>

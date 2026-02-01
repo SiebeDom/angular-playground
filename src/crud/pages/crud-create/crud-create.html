@@ -1,0 +1,5 @@
+<p-toast/>
+<form [formGroup]="petForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+  <app-crud-form [petFormGroup]="getFormGroup()" [formSubmitted]="formSubmitted()"></app-crud-form>
+  <button pButton class="w-20" severity="secondary" type="submit"><span pButtonLabel>Submit</span></button>
+</form>
