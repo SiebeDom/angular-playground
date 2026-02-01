@@ -28,13 +28,13 @@ export class AppLayout {
   items = computed(() => [
     {
       label: 'Demo',
-      expanded: this.currentUrl().startsWith('/crud'),
+      expanded: this.currentUrl().startsWith('/pet'),
       items: [
         {
-          label: 'CRUD',
-          routerLink: '/crud',
+          label: 'Pets',
+          routerLink: '/pet',
           icon: 'pi pi-plus',
-          styleClass: this.isActive('/crud')
+          styleClass: this.isActive('/pet')
         },
         {
           label: 'Steps',

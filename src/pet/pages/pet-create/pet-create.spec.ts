@@ -1,17 +1,17 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {CrudCreate} from './crud-create';
+import {PetCreate} from './pet-create';
 import {ActivatedRoute} from '@angular/router';
 import {of} from 'rxjs';
 import {MessageService} from 'primeng/api';
 
 describe('CrudCreate', () => {
-  let component: CrudCreate;
-  let fixture: ComponentFixture<CrudCreate>;
+  let component: PetCreate;
+  let fixture: ComponentFixture<PetCreate>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CrudCreate],
+      imports: [PetCreate],
       providers: [
         {
           provide: ActivatedRoute,
@@ -27,7 +27,7 @@ describe('CrudCreate', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(CrudCreate);
+    fixture = TestBed.createComponent(PetCreate);
     component = fixture.componentInstance;
     await fixture.whenStable();
   })

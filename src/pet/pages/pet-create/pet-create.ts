@@ -7,7 +7,7 @@ import {HttpClient} from '@angular/common/http';
 import {firstValueFrom} from 'rxjs';
 import {Router} from '@angular/router';
 import {getPetFormGroup} from '../../model/PetFormGroup';
-import {CrudForm, PetFormControls} from '../../components/crud-form/crud-form';
+import {PetForm, PetFormControls} from '../../components/pet-form/pet-form';
 
 interface MainFormControls {
   pet: FormGroup<PetFormControls>;
@@ -20,12 +20,11 @@ interface MainFormControls {
     ReactiveFormsModule,
     ButtonDirective,
     ButtonLabel,
-    CrudForm
+    PetForm
   ],
-  templateUrl: './crud-create.html',
-  styleUrl: './crud-create.css',
+  templateUrl: './pet-create.html'
 })
-export class CrudCreate {
+export class PetCreate {
   messageService = inject(MessageService);
   fb = inject(FormBuilder);
   router = inject(Router);
@@ -45,7 +44,7 @@ export class CrudCreate {
         detail: `Pet with id ${response} created`,
         life: 3000
       });
-      this.router.navigate(['/crud']);
+      this.router.navigate(['/pet']);
     }
   }
 

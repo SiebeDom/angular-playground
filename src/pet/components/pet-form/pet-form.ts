@@ -16,10 +16,9 @@ export interface PetFormControls {
     Message,
     ReactiveFormsModule
   ],
-  templateUrl: './crud-form.html',
-  styleUrl: './crud-form.css',
+  templateUrl: './pet-form.html'
 })
-export class CrudForm {
+export class PetForm {
   petFormGroup = input.required<FormGroup<PetFormControls>>();
 
   formSubmitted = input<boolean>(false);

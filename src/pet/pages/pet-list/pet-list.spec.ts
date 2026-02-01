@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CrudList } from './crud-list';
+import { PetList } from './pet-list';
 import {ActivatedRoute} from '@angular/router';
 import {of} from 'rxjs';
 
 describe('CrudList', () => {
-  let component: CrudList;
-  let fixture: ComponentFixture<CrudList>;
+  let component: PetList;
+  let fixture: ComponentFixture<PetList>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CrudList],
+      imports: [PetList],
       providers: [
         {
           provide: ActivatedRoute,
@@ -22,7 +22,7 @@ describe('CrudList', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CrudList);
+    fixture = TestBed.createComponent(PetList);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

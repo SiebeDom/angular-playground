@@ -1,5 +1,12 @@
-<a routerLink="/crud/create">Create</a>
 <p-table [value]="petsValue()" [tableStyle]="{ 'min-width': '50rem' }">
+  <ng-template #caption>
+    <div class="flex justify-between">
+      <h1>Pets</h1>
+      <a routerLink="/pet/create" pButton>
+        <span pButtonLabel>Create</span>
+      </a>
+    </div>
+  </ng-template>
   <ng-template #header>
     <tr>
       <th>Id</th>

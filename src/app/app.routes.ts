@@ -1,7 +1,7 @@
 import {Routes} from '@angular/router';
-import {CrudList} from '../crud/pages/crud-list/crud-list';
+import {PetList} from '../pet/pages/pet-list/pet-list';
 import {Homepage} from '../homepage/homepage';
-import {CrudCreate} from '../crud/pages/crud-create/crud-create';
+import {PetCreate} from '../pet/pages/pet-create/pet-create';
 
 export const routes: Routes = [
   {
@@ -9,11 +9,11 @@ export const routes: Routes = [
     component: Homepage,
   },
   {
-    path: 'crud',
-    component: CrudList
+    path: 'pet',
+    component: PetList
   },
   {
-    path: 'crud/create',
-    component: CrudCreate,
+    path: 'pet/create',
+    component: PetCreate,
   }
 ];
