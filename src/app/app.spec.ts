@@ -2,6 +2,7 @@ import {TestBed} from '@angular/core/testing';
 import {App} from './app';
 import {ActivatedRoute} from '@angular/router';
 import {of} from 'rxjs';
+import {MessageService} from 'primeng/api';
 
 describe('App', () => {
   beforeEach(async () => {
@@ -13,7 +14,8 @@ describe('App', () => {
           useValue: {
             paramMap: of({ get: () => 1 }),
           },
-        }
+        },
+        MessageService
       ]
     }).compileComponents();
   });

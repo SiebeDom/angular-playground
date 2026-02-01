@@ -7,6 +7,7 @@ import {firstValueFrom} from 'rxjs';
 import {Router} from '@angular/router';
 import {getPetFormGroup} from '../../model/PetFormGroup';
 import {PetForm, PetFormControls} from '../../components/pet-form/pet-form';
+import {Pet} from '../../model/Pet';
 
 interface MainFormControls {
   pet: FormGroup<PetFormControls>;
@@ -36,7 +37,7 @@ export class PetCreate {
   async onSubmit() {
     this.formSubmitted.set(true);
     if (this.petForm.valid) {
-      const response = await firstValueFrom(this.httpClient.post<Vet>('/api/pets', this.petForm.value.pet));
+      const response = await firstValueFrom(this.httpClient.post<Pet>('/api/pets', this.petForm.value.pet));
       this.messageService.add({
         severity: 'success',
         summary: 'Success',

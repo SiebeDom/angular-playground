@@ -1,18 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {VetWithPets} from './vet-with-pets';
+import {MessageService} from 'primeng/api';
 
-import { VetWithvets } from './vet-with-vets';
 
 describe('VetWithvets', () => {
-  let component: VetWithvets;
-  let fixture: ComponentFixture<VetWithvets>;
+  let component: VetWithPets;
+  let fixture: ComponentFixture<VetWithPets>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [VetWithvets]
+      imports: [VetWithPets],
+      providers: [
+        MessageService
+      ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(VetWithvets);
+    fixture = TestBed.createComponent(VetWithPets);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

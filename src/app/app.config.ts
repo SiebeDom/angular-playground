@@ -3,8 +3,6 @@ import {provideRouter, withComponentInputBinding} from '@angular/router';
 import {providePrimeNG} from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import {routes} from './app.routes';
-import {HttpInterceptorFn, HttpResponse, provideHttpClient, withInterceptors} from '@angular/common/http';
-import {delay, of} from 'rxjs';
 import {MessageService} from 'primeng/api';
 
 // export const demoBackendInterceptor: HttpInterceptorFn = (req, next) => {

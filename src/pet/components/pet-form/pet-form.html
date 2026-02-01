@@ -1,4 +1,4 @@
-<div class="grid grid-cols-1 gap-4" [formGroup]="petFormGroup()">
+<div class="grid grid-cols-1 gap-4" [formGroup]="getPetFormGroup()">
   <div>
     <input pInputText type="text" id="name" placeholder="Name" formControlName="name" [invalid]="isInvalid('name')"/>
     @if (isInvalid('name')) {
@@ -19,4 +19,3 @@
     }
   </div>
 </div>
-

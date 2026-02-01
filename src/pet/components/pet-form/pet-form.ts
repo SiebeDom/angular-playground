@@ -20,11 +20,14 @@ export interface PetFormControls {
 })
 export class PetForm {
   petFormGroup = input.required<FormGroup<PetFormControls>>();
-
   formSubmitted = input<boolean>(false);
 
   isInvalid(controlName: keyof PetFormControls) {
     const control = this.petFormGroup()?.get(controlName);
     return control?.invalid && (control.touched || this.formSubmitted());
+  }
+
+  getPetFormGroup() {
+    return this.petFormGroup() as FormGroup;
   }
 }

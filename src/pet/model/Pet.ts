@@ -1,5 +1,5 @@
 //Use different object for every kind of operation
-interface Pet {
+export interface Pet {
   id: string;
   name: string;
   type: string;

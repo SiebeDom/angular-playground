@@ -10,6 +10,7 @@ import {VetForm, VetFormControls} from '../../components/vet-form/vet-form';
 import {getPetFormGroup} from '../../../pet/model/PetFormGroup';
 import {PetForm, PetFormControls} from '../../../pet/components/pet-form/pet-form';
 import {firstValueFrom} from 'rxjs';
+import { Vet } from '../../model/Vet';
 
 interface MainFormControls {
   vet: FormGroup<VetFormControls>;

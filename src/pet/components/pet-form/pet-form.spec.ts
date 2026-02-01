@@ -1,8 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PetForm } from './pet-form';
+import {FormGroup} from '@angular/forms';
+import {getPetFormGroup} from '../../model/PetFormGroup';
 
-describe('CrudForm', () => {
+describe('PetForm', () => {
   let component: PetForm;
   let fixture: ComponentFixture<PetForm>;
 
@@ -14,6 +16,8 @@ describe('CrudForm', () => {
 
     fixture = TestBed.createComponent(PetForm);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('petFormGroup', new FormGroup(getPetFormGroup()));
+    fixture.detectChanges();
     await fixture.whenStable();
   });
 

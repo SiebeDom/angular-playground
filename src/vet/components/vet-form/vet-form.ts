@@ -18,11 +18,14 @@ export interface VetFormControls {
 })
 export class VetForm {
   vetFormGroup = input.required<FormGroup<VetFormControls>>();
-
   formSubmitted = input<boolean>(false);
 
   isInvalid(controlName: keyof VetFormControls) {
     const control = this.vetFormGroup()?.get(controlName);
     return control?.invalid && (control.touched || this.formSubmitted());
+  }
+
+  getVetFormGroup() {
+    return this.vetFormGroup() as FormGroup
   }
 }

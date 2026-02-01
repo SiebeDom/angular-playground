@@ -7,6 +7,7 @@ import {firstValueFrom} from 'rxjs';
 import {Router} from '@angular/router';
 import {getVetFormGroup} from '../../model/VetFormGroup';
 import {VetForm, VetFormControls} from '../../components/vet-form/vet-form';
+import { Vet } from '../../model/Vet';
 
 interface MainFormControls {
   vet: FormGroup<VetFormControls>;
