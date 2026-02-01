@@ -5,11 +5,11 @@ import {ButtonDirective, ButtonLabel} from 'primeng/button';
 import {HttpClient} from '@angular/common/http';
 import {firstValueFrom} from 'rxjs';
 import {Router} from '@angular/router';
-import {getPetFormGroup} from '../../model/PetFormGroup';
-import {PetForm, PetFormControls} from '../../components/pet-form/pet-form';
+import {getVetFormGroup} from '../../model/VetFormGroup';
+import {VetForm, VetFormControls} from '../../components/vet-form/vet-form';
 
 interface MainFormControls {
-  pet: FormGroup<PetFormControls>;
+  vet: FormGroup<VetFormControls>;
 }
 
 @Component({
@@ -18,36 +18,36 @@ interface MainFormControls {
     ReactiveFormsModule,
     ButtonDirective,
     ButtonLabel,
-    PetForm
+    VetForm
   ],
-  templateUrl: './pet-create.html'
+  templateUrl: './vet-create.html'
 })
-export class PetCreate {
+export class VetCreate {
   messageService = inject(MessageService);
   fb = inject(FormBuilder);
   router = inject(Router);
   httpClient = inject(HttpClient);
 
-  petForm: FormGroup<MainFormControls> = this.fb.nonNullable.group({
-    pet: this.fb.nonNullable.group(getPetFormGroup())
+  vetForm: FormGroup<MainFormControls> = this.fb.nonNullable.group({
+    vet: this.fb.nonNullable.group(getVetFormGroup())
   });
   formSubmitted = signal(false);
 
   async onSubmit() {
     this.formSubmitted.set(true);
-    if (this.petForm.valid) {
-      const response = await firstValueFrom(this.httpClient.post<Vet>('/api/pets', this.petForm.value.pet));
+    if (this.vetForm.valid) {
+      const response = await firstValueFrom(this.httpClient.post<Vet>('/api/vets', this.vetForm.value.vet));
       this.messageService.add({
         severity: 'success',
         summary: 'Success',
-        detail: `Pet with id ${response} created`,
+        detail: `Vet with id ${response} created`,
         life: 3000
       });
-      this.router.navigate(['/pet']);
+      this.router.navigate(['/vet']);
     }
   }
 
   getFormGroup() {
-    return this.petForm.get('pet') as FormGroup
+    return this.vetForm.get('vet') as FormGroup
   }
 }

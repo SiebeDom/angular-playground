@@ -1,0 +1,30 @@
+<p-table [value]="vetsValue()" [tableStyle]="{ 'min-width': '50rem' }">
+  <ng-template #caption>
+    <div class="flex justify-between">
+      <h1>Vets</h1>
+      <a routerLink="/vet/create" pButton>
+        <span pButtonLabel>Create</span>
+      </a>
+      <a routerLink="/vet/createWithPets" pButton>
+        <span pButtonLabel>Create with pets</span>
+      </a>
+    </div>
+  </ng-template>
+  <ng-template #header>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+<!--      <th style="min-width: 12rem"></th>-->
+    </tr>
+  </ng-template>
+  <ng-template #body let-vet>
+    <tr>
+      <td>{{ vet.id }}</td>
+      <td>{{ vet.name }}</td>
+      <td>
+<!--        <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" [routerLink]="['/pet', 'update', pet.id]" />-->
+<!--&lt;!&ndash;        <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteProduct(product)" />&ndash;&gt;-->
+<!--      </td>-->
+    </tr>
+  </ng-template>
+</p-table>

@@ -37,28 +37,29 @@ export class AppLayout {
         {
           label: 'Pets',
           routerLink: '/pet',
-          icon: 'pi pi-plus',
+          // icon: 'pi pi-plus',
           styleClass: this.isActive('/pet')
         },
         {
-          label: 'Steps',
-          icon: 'pi pi-search'
+          label: 'Vets',
+          routerLink: '/vet',
+          // icon: 'pi pi-search'
         }
       ]
     },
-    {
-      label: 'Something else',
-      items: [
-        {
-          label: 'Bla',
-          icon: 'pi pi-cog'
-        },
-        {
-          label: 'Test',
-          icon: 'pi pi-sign-out'
-        }
-      ]
-    }
+    // {
+    //   label: 'Something else',
+    //   items: [
+    //     {
+    //       label: 'Bla',
+    //       icon: 'pi pi-cog'
+    //     },
+    //     {
+    //       label: 'Test',
+    //       icon: 'pi pi-sign-out'
+    //     }
+    //   ]
+    // }
   ]);
 
   isActive(path: string): string {

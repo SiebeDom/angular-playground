@@ -52,4 +52,15 @@ export const handlers = [
 
     return new HttpResponse(null, { status: 204 });
   }),
+
+  //Vet with pets
+
+  // CREATE
+  http.post<{}, Omit<Pet, 'id'>>('/api/vetWithPets', async ({ request }) => {
+    const body = await request.json();
+    console.log(body);
+    //const created = petsDb.create(body);
+
+    return HttpResponse.json(crypto.randomUUID(), { status: 201 });
+  }),
 ];

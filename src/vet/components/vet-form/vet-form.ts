@@ -1,30 +1,28 @@
-import {Component, input} from '@angular/core';
+import {Component, effect, input} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {InputText} from 'primeng/inputtext';
 import {Message} from 'primeng/message';
 
-export interface PetFormControls {
-  mood: FormControl<string | null>;
+export interface VetFormControls {
   name: FormControl<string | null>;
-  type: FormControl<string | null>;
 }
 
 @Component({
-  selector: 'app-pet-form',
+  selector: 'app-vet-form',
   imports: [
     InputText,
     Message,
     ReactiveFormsModule
   ],
-  templateUrl: './pet-form.html'
+  templateUrl: './vet-form.html'
 })
-export class PetForm {
-  petFormGroup = input.required<FormGroup<PetFormControls>>();
+export class VetForm {
+  vetFormGroup = input.required<FormGroup<VetFormControls>>();
 
   formSubmitted = input<boolean>(false);
 
-  isInvalid(controlName: keyof PetFormControls) {
-    const control = this.petFormGroup()?.get(controlName);
+  isInvalid(controlName: keyof VetFormControls) {
+    const control = this.vetFormGroup()?.get(controlName);
     return control?.invalid && (control.touched || this.formSubmitted());
   }
 }

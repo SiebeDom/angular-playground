@@ -31,8 +31,8 @@ export class PetUpdate {
 
   id = input<string>();
 
-  pet = httpResource<Pet>(() => `/api/pets/${this.id()}`);
-  petValue = computed<Pet | undefined>(() => this.pet.hasValue() ? this.pet.value() : undefined);
+  pet = httpResource<Vet>(() => `/api/pets/${this.id()}`);
+  petValue = computed<Vet | undefined>(() => this.pet.hasValue() ? this.pet.value() : undefined);
 
   petForm: FormGroup<MainFormControls> = this.fb.nonNullable.group({
     pet: this.fb.nonNullable.group(getPetFormGroup())
@@ -50,7 +50,7 @@ export class PetUpdate {
   async onSubmit() {
     this.formSubmitted.set(true);
     if (this.petForm.valid) {
-      const response = await firstValueFrom(this.httpClient.put<Pet>(`/api/pets/${this.id()}`, this.petForm.value.pet));
+      const response = await firstValueFrom(this.httpClient.put<Vet>(`/api/pets/${this.id()}`, this.petForm.value.pet));
       this.messageService.add({
         severity: 'success',
         summary: 'Success',

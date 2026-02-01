@@ -1,0 +1,43 @@
+<form [formGroup]="vetWithPetsForm" (ngSubmit)="onSubmit()">
+  <p-stepper [value]="1" class="basis-[50rem]">
+    <p-step-list>
+      <p-step [value]="1">Vet</p-step>
+      <p-step [value]="2">Pets</p-step>
+    </p-step-list>
+    <p-step-panels>
+      <p-step-panel [value]="1">
+        <ng-template #content let-activateCallback="activateCallback">
+          <h1>Vet</h1>
+          <form [formGroup]="vetWithPetsForm.controls.vet" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+            <app-vet-form [vetFormGroup]="getVetFormGroup()" [formSubmitted]="formSubmitted()"></app-vet-form>
+          </form>
+          <div class="flex pt-6 justify-end">
+            <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(2)"/>
+          </div>
+        </ng-template>
+      </p-step-panel>
+      <p-step-panel [value]="2">
+        <ng-template #content let-activateCallback="activateCallback">
+          <div class="flex flex-col gap-4" formArrayName="pets">
+            <h1>Pets</h1>
+            <p-button type="button" (click)="addPet()">Add pet</p-button>
+            @for (pet of pets.controls; track $index; let i = $index) {
+              <div [formGroupName]="i" class="pet">
+                <h2>Pet {{i}}</h2>
+                <app-pet-form
+                  [petFormGroup]="convertToFormGroup(pet)"
+                  [formSubmitted]="formSubmitted()">
+                </app-pet-form>
+              </div>
+            }
+          </div>
+          <div class="flex pt-6 justify-between">
+            <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(1)"/>
+            <p-button label="Submit" icon="pi pi-arrow-right" iconPos="right" type="submit"/>
+          </div>
+        </ng-template>
+      </p-step-panel>
+    </p-step-panels>
+  </p-stepper>
+</form>
+

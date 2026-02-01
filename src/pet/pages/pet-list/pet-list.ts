@@ -5,7 +5,7 @@ import {RouterLink} from '@angular/router';
 import {Button, ButtonDirective, ButtonLabel} from 'primeng/button';
 
 @Component({
-  selector: 'app-crud-list',
+  selector: 'app-pet-list',
   imports: [
     TableModule,
     RouterLink,
