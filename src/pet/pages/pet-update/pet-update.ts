@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, effect, inject, input, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, effect, inject, input} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {MessageService} from 'primeng/api';
 import {Button} from 'primeng/button';
@@ -32,7 +32,6 @@ export class PetUpdate {
   petForm: FormGroup<MainFormControls> = this.fb.nonNullable.group({
     pet: this.fb.nonNullable.group(getPetFormGroup()),
   });
-  formSubmitted = signal(false);
 
   private readonly fillFormEffect = effect(() => {
     if (this.pet.hasValue()) {
@@ -50,7 +49,10 @@ export class PetUpdate {
   });
 
   async onSubmit() {
-    this.formSubmitted.set(true);
+    if (this.petForm.invalid) {
+      this.petForm.markAllAsDirty();
+      return
+    }
     if (this.petForm.valid) {
       try {
         const response = await firstValueFrom(

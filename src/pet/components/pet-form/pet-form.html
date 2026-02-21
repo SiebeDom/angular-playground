@@ -18,4 +18,10 @@
       <p-message severity="error" size="small" variant="simple">Mood is required.</p-message>
     }
   </div>
+  <div>
+    <p-datepicker formControlName="birthDate" [showIcon]="true" [invalid]="isInvalid('birthDate')" />
+    @if (isInvalid('birthDate')) {
+      <p-message severity="error" size="small" variant="simple">birthDate is required.</p-message>
+    }
+  </div>
 </div>

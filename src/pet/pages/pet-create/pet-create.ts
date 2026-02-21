@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {MessageService} from 'primeng/api';
 import {Button} from 'primeng/button';
@@ -28,30 +28,30 @@ export class PetCreate {
   petForm: FormGroup<MainFormControls> = this.fb.nonNullable.group({
     pet: this.fb.nonNullable.group(getPetFormGroup()),
   });
-  formSubmitted = signal(false);
 
   async onSubmit() {
-    this.formSubmitted.set(true);
-    if (this.petForm.valid) {
-      try {
-        const response = await firstValueFrom(
-          this.httpClient.post<Pet>('/api/pets', this.petForm.value.pet)
-        );
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: `Pet with id ${response} created`,
-          life: 3000,
-        });
-        this.router.navigate(['/pet']);
-      } catch {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Failed to create pet. Please try again.',
-          life: 3000,
-        });
-      }
+    if (this.petForm.invalid) {
+      this.petForm.markAllAsDirty();
+      return
+    }
+    try {
+      const response = await firstValueFrom(
+        this.httpClient.post<Pet>('/api/pets', this.petForm.value.pet)
+      );
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: `Pet with id ${response} created`,
+        life: 3000,
+      });
+      this.router.navigate(['/pet']);
+    } catch {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Failed to create pet. Please try again.',
+        life: 3000,
+      });
     }
   }
 
