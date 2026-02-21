@@ -1,0 +1,8 @@
+<div class="flex flex-col gap-6 p-6">
+  <h1>Welcome to Angular Playground</h1>
+  <p>A demo app showcasing Angular 21 with PrimeNG, Tailwind CSS, and MSW. Use the navigation on the left or jump in directly:</p>
+  <div class="flex gap-3">
+    <p-button label="Pets" icon="pi pi-heart" (onClick)="router.navigate(['/pet'])"/>
+    <p-button label="Vets" icon="pi pi-user" severity="secondary" (onClick)="router.navigate(['/vet'])"/>
+  </div>
+</div>

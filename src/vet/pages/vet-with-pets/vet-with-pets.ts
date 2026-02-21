@@ -34,9 +34,11 @@ export class VetWithPets {
     pets: this.fb.nonNullable.array([this.fb.nonNullable.group(getPetFormGroup())]),
   });
   formSubmitted = signal(false);
+  submittedPets = signal<boolean[]>([false]);
 
   async onSubmit() {
     this.formSubmitted.set(true);
+    this.submittedPets.set(this.pets.controls.map(() => true));
     if (this.vetWithPetsForm.valid) {
       try {
         const response = await firstValueFrom(
@@ -71,8 +73,17 @@ export class VetWithPets {
     return this.vetWithPetsForm.get('pets') as FormArray;
   }
 
+  nextStep(activateCallback: (step: number) => void) {
+    if (this.vetWithPetsForm.get('vet')?.valid) {
+      activateCallback(2);
+    } else {
+      this.formSubmitted.set(true);
+    }
+  }
+
   addPet() {
     this.pets.push(this.fb.nonNullable.group(getPetFormGroup()));
+    this.submittedPets.update(arr => [...arr, false]);
   }
 
   convertToFormGroup(pet: AbstractControl) {

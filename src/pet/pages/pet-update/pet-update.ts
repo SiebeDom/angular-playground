@@ -38,6 +38,15 @@ export class PetUpdate {
     if (this.pet.hasValue()) {
       this.petForm.patchValue({pet: this.pet.value() as Pet});
     }
+    if (this.pet.error()) {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Not found',
+        detail: 'Pet not found.',
+        life: 3000,
+      });
+      this.router.navigate(['/pet']);
+    }
   });
 
   async onSubmit() {
@@ -50,7 +59,7 @@ export class PetUpdate {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
-          detail: `Pet with id ${response} updated`,
+          detail: `Pet with id ${response.id} updated`,
           life: 3000,
         });
         this.router.navigate(['/pet']);

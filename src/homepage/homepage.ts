@@ -1,10 +1,14 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import {Router} from '@angular/router';
+import {Button} from 'primeng/button';
 
 @Component({
   selector: 'app-homepage',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [],
+  imports: [Button],
   templateUrl: './homepage.html',
   styleUrl: './homepage.css',
 })
-export class Homepage {}
+export class Homepage {
+  router = inject(Router);
+}

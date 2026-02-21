@@ -1,5 +1,8 @@
 <h1>Pet update</h1>
 <form [formGroup]="petForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
   <app-pet-form [petFormGroup]="getFormGroup()" [formSubmitted]="formSubmitted()"></app-pet-form>
-  <p-button label="Submit" styleClass="w-20" severity="secondary" type="submit"/>
+  <div class="flex gap-2">
+    <p-button label="Cancel" severity="secondary" type="button" (onClick)="router.navigate(['/pet'])"/>
+    <p-button label="Submit" type="submit"/>
+  </div>
 </form>
