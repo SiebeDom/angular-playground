@@ -1,0 +1,21 @@
+<div class="grid grid-cols-1 gap-4" [formGroup]="getPetFormGroup()">
+  <div>
+    <input pInputText type="text" id="name" placeholder="Name" formControlName="name" [invalid]="isInvalid('name')"/>
+    @if (isInvalid('name')) {
+      <p-message severity="error" size="small" variant="simple">Name is required.</p-message>
+    }
+  </div>
+  <div>
+    <input pInputText type="text" id="type" placeholder="Type" formControlName="type" [invalid]="isInvalid('type')"/>
+    @if (isInvalid('type')) {
+      <p-message severity="error" size="small" variant="simple">Type is required.</p-message>
+    }
+
+  </div>
+  <div>
+    <input pInputText type="text" id="mood" placeholder="Mood" formControlName="mood" [invalid]="isInvalid('mood')"/>
+    @if (isInvalid('mood')) {
+      <p-message severity="error" size="small" variant="simple">Mood is required.</p-message>
+    }
+  </div>
+</div>
