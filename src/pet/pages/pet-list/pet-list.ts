@@ -1,21 +1,17 @@
-import {Component, computed} from '@angular/core';
+import {ChangeDetectionStrategy, Component, computed} from '@angular/core';
 import {TableModule} from 'primeng/table';
 import {httpResource} from '@angular/common/http';
 import {RouterLink} from '@angular/router';
-import {Button, ButtonDirective, ButtonLabel} from 'primeng/button';
+import {Button} from 'primeng/button';
+import {Pet} from '../../model/Pet';
 
 @Component({
   selector: 'app-pet-list',
-  imports: [
-    TableModule,
-    RouterLink,
-    ButtonDirective,
-    ButtonLabel,
-    Button
-  ],
-  templateUrl: './pet-list.html'
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [TableModule, RouterLink, Button],
+  templateUrl: './pet-list.html',
 })
 export class PetList {
-  pets = httpResource<any[]>(() => `/api/pets`);
-  petsValue = computed<any[]>(() => this.pets.hasValue() ? this.pets.value() : []);
+  pets = httpResource<Pet[]>(() => `/api/pets`);
+  petsValue = computed<Pet[]>(() => this.pets.value() ?? []);
 }

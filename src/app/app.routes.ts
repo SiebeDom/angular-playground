@@ -1,39 +1,36 @@
 import {Routes} from '@angular/router';
-import {PetList} from '../pet/pages/pet-list/pet-list';
-import {Homepage} from '../homepage/homepage';
-import {PetCreate} from '../pet/pages/pet-create/pet-create';
-import {PetUpdate} from '../pet/pages/pet-update/pet-update';
-import {VetCreate} from '../vet/pages/vet-create/vet-create';
-import {VetWithPets} from '../vet/pages/vet-with-pets/vet-with-pets';
-import {VetList} from '../vet/pages/vet-list/vet-list';
 
 export const routes: Routes = [
   {
     path: '',
-    component: Homepage,
+    loadComponent: () => import('../homepage/homepage').then(m => m.Homepage),
   },
   {
     path: 'pet',
-    component: PetList
+    loadComponent: () => import('../pet/pages/pet-list/pet-list').then(m => m.PetList),
   },
   {
     path: 'pet/create',
-    component: PetCreate,
+    loadComponent: () => import('../pet/pages/pet-create/pet-create').then(m => m.PetCreate),
   },
   {
     path: 'pet/update/:id',
-    component: PetUpdate,
+    loadComponent: () => import('../pet/pages/pet-update/pet-update').then(m => m.PetUpdate),
   },
   {
     path: 'vet',
-    component: VetList
+    loadComponent: () => import('../vet/pages/vet-list/vet-list').then(m => m.VetList),
   },
   {
     path: 'vet/create',
-    component: VetCreate,
+    loadComponent: () => import('../vet/pages/vet-create/vet-create').then(m => m.VetCreate),
   },
   {
     path: 'vet/createWithPets',
-    component: VetWithPets,
-  }
+    loadComponent: () => import('../vet/pages/vet-with-pets/vet-with-pets').then(m => m.VetWithPets),
+  },
+  {
+    path: '**',
+    redirectTo: '',
+  },
 ];
