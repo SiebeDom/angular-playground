@@ -45,3 +45,4 @@ Thumbs.db
 
 # Local settings
 .claude/settings.local.json
+/.playwright-mcp/
