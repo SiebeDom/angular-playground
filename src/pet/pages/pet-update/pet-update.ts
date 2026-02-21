@@ -50,7 +50,7 @@ export class PetUpdate {
 
   async onSubmit() {
     if (this.petForm.invalid) {
-      this.petForm.markAllAsDirty();
+      this.petForm.markAllAsTouched();
       return
     }
     if (this.petForm.valid) {

@@ -22,7 +22,7 @@ export class PetForm {
 
   isInvalid(controlName: keyof PetFormControls) {
     const control = this.petFormGroup()?.get(controlName);
-    return control?.invalid && (control.dirty);
+    return control?.invalid && control.touched;
   }
 
   getPetFormGroup() {

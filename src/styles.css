@@ -7,3 +7,13 @@
 .route-active a {
   font-weight: 600;
 }
+
+/* PrimeNG datepicker fires its invalid border on ng-invalid+ng-dirty (Angular host classes).
+   Override: suppress while the user is still typing (dirty but not yet touched),
+   and add an equivalent rule for the touched state (covers markAllAsTouched on submit). */
+.p-datepicker.ng-invalid.ng-dirty:not(.ng-touched) .p-inputtext {
+  border-color: var(--p-inputtext-border-color);
+}
+.p-datepicker.ng-invalid.ng-touched .p-inputtext {
+  border-color: var(--p-inputtext-invalid-border-color);
+}

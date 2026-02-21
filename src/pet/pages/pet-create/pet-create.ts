@@ -31,7 +31,7 @@ export class PetCreate {
 
   async onSubmit() {
     if (this.petForm.invalid) {
-      this.petForm.markAllAsDirty();
+      this.petForm.markAllAsTouched();
       return
     }
     try {
