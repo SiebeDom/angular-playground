@@ -1,7 +1,0 @@
-{
-  "enableAllProjectMcpServers": true,
-  "enabledMcpjsonServers": [
-    "angular-cli",
-    "primeng"
-  ]
-}
