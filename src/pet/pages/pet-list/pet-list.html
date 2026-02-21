@@ -2,9 +2,7 @@
   <ng-template #caption>
     <div class="flex justify-between">
       <h1>Pets</h1>
-      <a routerLink="/pet/create" pButton>
-        <span pButtonLabel>Create</span>
-      </a>
+      <p-button label="Create" [routerLink]="'/pet/create'"/>
     </div>
   </ng-template>
   <ng-template #header>
@@ -13,7 +11,7 @@
       <th>Name</th>
       <th>Type</th>
       <th>Mood</th>
-      <th style="min-width: 12rem"></th>
+      <th class="min-w-48"></th>
     </tr>
   </ng-template>
   <ng-template #body let-pet>
@@ -23,8 +21,7 @@
       <td>{{ pet.type }}</td>
       <td>{{ pet.mood }}</td>
       <td>
-        <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" [routerLink]="['/pet', 'update', pet.id]" />
-<!--        <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteProduct(product)" />-->
+        <p-button icon="pi pi-pencil" [rounded]="true" [outlined]="true" [routerLink]="['/pet', 'update', pet.id]"/>
       </td>
     </tr>
   </ng-template>

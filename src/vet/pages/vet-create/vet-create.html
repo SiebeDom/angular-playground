@@ -1,5 +1,5 @@
 <h1>Vet create</h1>
 <form [formGroup]="vetForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
   <app-vet-form [vetFormGroup]="getFormGroup()" [formSubmitted]="formSubmitted()"></app-vet-form>
-  <button pButton class="w-20" severity="secondary" type="submit"><span pButtonLabel>Submit</span></button>
+  <p-button label="Submit" styleClass="w-20" severity="secondary" type="submit"/>
 </form>

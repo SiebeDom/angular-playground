@@ -1,4 +1,4 @@
-import {Component, effect, input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, input} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {InputText} from 'primeng/inputtext';
 import {Message} from 'primeng/message';
@@ -9,12 +9,9 @@ export interface VetFormControls {
 
 @Component({
   selector: 'app-vet-form',
-  imports: [
-    InputText,
-    Message,
-    ReactiveFormsModule
-  ],
-  templateUrl: './vet-form.html'
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [InputText, Message, ReactiveFormsModule],
+  templateUrl: './vet-form.html',
 })
 export class VetForm {
   vetFormGroup = input.required<FormGroup<VetFormControls>>();
@@ -26,6 +23,6 @@ export class VetForm {
   }
 
   getVetFormGroup() {
-    return this.vetFormGroup() as FormGroup
+    return this.vetFormGroup() as FormGroup;
   }
 }
