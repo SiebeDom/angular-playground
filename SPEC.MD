@@ -9,4 +9,6 @@ I want:
 * Good/useful unit tests and integration tests
 * Responsive template
 * Zoneless
-*
+* WCAG complient
+* Reactive
+* Responsive
