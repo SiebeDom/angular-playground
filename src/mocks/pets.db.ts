@@ -1,10 +1,10 @@
-export type Pet = {
+export interface Pet {
   id: string;
   name: string;
   type: 'Dog' | 'Cat';
   mood: string;
   birthDate: string | null;
-};
+}
 
 let pets: Pet[] = [
   { id: '1', name: 'John', type: 'Dog', mood: 'Happy', birthDate: '2020-03-15T00:00:00.000Z' },

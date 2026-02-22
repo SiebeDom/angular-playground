@@ -3,8 +3,6 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {PetCreate} from './pet-create';
 import {ActivatedRoute} from '@angular/router';
 import {of} from 'rxjs';
-import {App} from '../../../app/app';
-import {By} from '@angular/platform-browser';
 
 describe('PetCreate', () => {
   let component: PetCreate;

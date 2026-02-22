@@ -18,7 +18,7 @@ export const handlers = [
   }),
 
   // Pets - CREATE
-  http.post<{}, Omit<Pet, 'id'>>('/api/pets', async ({request}) => {
+  http.post<object, Omit<Pet, 'id'>>('/api/pets', async ({request}) => {
     const body = await request.json();
     const created = petsDb.create(body);
     return HttpResponse.json(created, {status: 201});
@@ -68,7 +68,7 @@ export const handlers = [
   }),
 
   // Vets - CREATE
-  http.post<{}, Omit<Vet, 'id'>>('/api/vets', async ({request}) => {
+  http.post<object, Omit<Vet, 'id'>>('/api/vets', async ({request}) => {
     const body = await request.json();
     const created = vetsDb.create(body);
     return HttpResponse.json(created, {status: 201});
