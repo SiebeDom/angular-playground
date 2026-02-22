@@ -11,6 +11,7 @@ import {getPetFormGroup} from '../../../pet/model/PetFormGroup';
 import {PetForm, PetFormControls} from '../../../pet/components/pet-form/pet-form';
 import {firstValueFrom} from 'rxjs';
 import {Vet} from '../../model/Vet';
+import {markAllAsTouchedAndDirty} from '../../../shared/util/util';
 
 interface MainFormControls {
   vet: FormGroup<VetFormControls>;
@@ -39,30 +40,33 @@ export class VetWithPets {
   async onSubmit() {
     this.formSubmitted.set(true);
     this.submittedPets.set(this.pets.controls.map(() => true));
-    if (this.vetWithPetsForm.valid) {
-      try {
-        const response = await firstValueFrom(
-          this.httpClient.post<Vet>('/api/vetWithPets', {
-            vet: this.vetWithPetsForm.value.vet,
-            pets: this.vetWithPetsForm.value.pets,
-          })
-        );
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: `Vet and pets with id ${response} created`,
-          life: 3000,
-        });
-        this.router.navigate(['/vet']);
-      } catch {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Failed to create vet with pets. Please try again.',
-          life: 3000,
-        });
-      }
+    if (this.vetWithPetsForm.invalid) {
+      markAllAsTouchedAndDirty(this.vetWithPetsForm);
+      return
     }
+    try {
+      const response = await firstValueFrom(
+        this.httpClient.post<Vet>('/api/vetWithPets', {
+          vet: this.vetWithPetsForm.value.vet,
+          pets: this.vetWithPetsForm.value.pets,
+        })
+      );
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: `Vet and pets with id ${response} created`,
+        life: 3000,
+      });
+      this.router.navigate(['/vet']);
+    } catch {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Failed to create vet with pets. Please try again.',
+        life: 3000,
+      });
+    }
+
   }
 
   getVetFormGroup() {

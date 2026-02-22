@@ -8,6 +8,7 @@ import {Router} from '@angular/router';
 import {getPetFormGroup} from '../../model/PetFormGroup';
 import {PetForm, PetFormControls} from '../../components/pet-form/pet-form';
 import {Pet} from '../../model/Pet';
+import {markAllAsTouchedAndDirty} from '../../../shared/util/util';
 
 interface MainFormControls {
   pet: FormGroup<PetFormControls>;
@@ -31,8 +32,7 @@ export class PetCreate {
 
   async onSubmit() {
     if (this.petForm.invalid) {
-      this.petForm.markAllAsDirty();
-      this.petForm.markAllAsTouched();
+      markAllAsTouchedAndDirty(this.petForm);
       return
     }
     try {
