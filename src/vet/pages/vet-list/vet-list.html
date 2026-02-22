@@ -20,7 +20,7 @@
       <td>{{ vet.id }}</td>
       <td>{{ vet.name }}</td>
       <td>
-        <p-button label="Edit" severity="secondary" [routerLink]="'/vet/update/' + vet.id"/>
+        <p-button icon="pi pi-pencil" [rounded]="true" [outlined]="true" [routerLink]="['/vet', 'update', vet.id]"/>
       </td>
     </tr>
   </ng-template>
