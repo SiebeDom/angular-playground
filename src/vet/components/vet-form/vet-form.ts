@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component, input, signal} from '@angular/core';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ChangeDetectionStrategy, Component, effect, input, signal} from '@angular/core';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {InputText} from 'primeng/inputtext';
 import {Message} from 'primeng/message';
 import {SelectButtonModule} from 'primeng/selectbutton';
@@ -27,6 +27,26 @@ export class VetForm {
     {label: 'Not conventionalized', value: 'not-conventionalized'},
   ];
   conventionStatus = signal<ConventionStatus>('conventionalized');
+
+  private readonly _conventionValidationEffect = effect(() => {
+    const status = this.conventionStatus();
+    const fg = this.vetFormGroup();
+    const nameControl = fg.get('conventionName');
+    const reasonControl = fg.get('conventionReason');
+
+    if (status === 'conventionalized') {
+      nameControl?.setValidators(Validators.required);
+      reasonControl?.clearValidators();
+      reasonControl?.reset('');
+    } else {
+      reasonControl?.setValidators(Validators.required);
+      nameControl?.clearValidators();
+      nameControl?.reset('');
+    }
+
+    nameControl?.updateValueAndValidity();
+    reasonControl?.updateValueAndValidity();
+  });
 
   isInvalid(controlName: keyof VetFormControls) {
     const control = this.vetFormGroup()?.get(controlName);

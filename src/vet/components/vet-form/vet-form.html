@@ -18,13 +18,19 @@
     @if (conventionStatus() === 'conventionalized') {
       <div>
         <input pInputText type="text" id="conventionName" placeholder="Convention name"
-               formControlName="conventionName"/>
+               formControlName="conventionName" [invalid]="isInvalid('conventionName')"/>
+        @if (isInvalid('conventionName')) {
+          <p-message severity="error" size="small" variant="simple">Convention name is required.</p-message>
+        }
       </div>
     }
     @if (conventionStatus() === 'not-conventionalized') {
       <div>
         <input pInputText type="text" id="conventionReason" placeholder="Reason not conventionalized"
-               formControlName="conventionReason"/>
+               formControlName="conventionReason" [invalid]="isInvalid('conventionReason')"/>
+        @if (isInvalid('conventionReason')) {
+          <p-message severity="error" size="small" variant="simple">Reason is required.</p-message>
+        }
       </div>
     }
   </div>
