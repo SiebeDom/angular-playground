@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, effect, input, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, effect, input, model} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {InputText} from 'primeng/inputtext';
 import {Message} from 'primeng/message';
@@ -26,7 +26,7 @@ export class VetForm {
     {label: 'Conventionalized', value: 'conventionalized'},
     {label: 'Not conventionalized', value: 'not-conventionalized'},
   ];
-  conventionStatus = signal<ConventionStatus>('conventionalized');
+  conventionStatus = model<ConventionStatus>('conventionalized');
 
   private readonly _conventionValidationEffect = effect(() => {
     const status = this.conventionStatus();

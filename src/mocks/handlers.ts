@@ -48,6 +48,25 @@ export const handlers = [
     return HttpResponse.json(vetsDb.getAll());
   }),
 
+  // Vets - READ one
+  http.get('/api/vets/:id', ({params}) => {
+    const vet = vetsDb.getById(params['id'] as string);
+    if (!vet) {
+      return new HttpResponse(null, {status: 404});
+    }
+    return HttpResponse.json(vet);
+  }),
+
+  // Vets - UPDATE
+  http.put<{id: string}, Partial<Vet>>('/api/vets/:id', async ({params, request}) => {
+    const body = await request.json();
+    const updated = vetsDb.update(params['id'] as string, body);
+    if (!updated) {
+      return new HttpResponse(null, {status: 404});
+    }
+    return HttpResponse.json(updated);
+  }),
+
   // Vets - CREATE
   http.post<{}, Omit<Vet, 'id'>>('/api/vets', async ({request}) => {
     const body = await request.json();

@@ -26,6 +26,10 @@ export const routes: Routes = [
     loadComponent: () => import('../vet/pages/vet-create/vet-create').then(m => m.VetCreate),
   },
   {
+    path: 'vet/update/:id',
+    loadComponent: () => import('../vet/pages/vet-update/vet-update').then(m => m.VetUpdate),
+  },
+  {
     path: 'vet/createWithPets',
     loadComponent: () => import('../vet/pages/vet-with-pets/vet-with-pets').then(m => m.VetWithPets),
   },

@@ -20,4 +20,11 @@ export const vetsDb = {
     vets.push(newVet);
     return newVet.id;
   },
+
+  update: (id: string, data: Partial<Omit<Vet, 'id'>>) => {
+    const index = vets.findIndex(v => v.id === id);
+    if (index === -1) return null;
+    vets[index] = {...vets[index], ...data};
+    return vets[index];
+  },
 };
