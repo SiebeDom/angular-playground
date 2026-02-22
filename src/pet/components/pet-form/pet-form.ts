@@ -8,7 +8,7 @@ export interface PetFormControls {
   mood: FormControl<string | null>;
   name: FormControl<string | null>;
   type: FormControl<string | null>;
-  birthDate: FormControl<string | null>;
+  birthDate: FormControl<Date | null>;
 }
 
 @Component({

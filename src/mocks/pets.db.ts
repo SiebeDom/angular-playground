@@ -3,11 +3,12 @@ export type Pet = {
   name: string;
   type: 'Dog' | 'Cat';
   mood: string;
+  birthDate: string | null;
 };
 
 let pets: Pet[] = [
-  { id: '1', name: 'John', type: 'Dog', mood: 'Happy' },
-  { id: '2', name: 'Vince', type: 'Cat', mood: 'Grumpy' },
+  { id: '1', name: 'John', type: 'Dog', mood: 'Happy', birthDate: '2020-03-15T00:00:00.000Z' },
+  { id: '2', name: 'Vince', type: 'Cat', mood: 'Grumpy', birthDate: '2018-07-22T00:00:00.000Z' },
 ];
 
 export const petsDb = {

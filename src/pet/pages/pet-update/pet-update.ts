@@ -8,6 +8,7 @@ import {Router} from '@angular/router';
 import {getPetFormGroup} from '../../model/PetFormGroup';
 import {PetForm, PetFormControls} from '../../components/pet-form/pet-form';
 import {Pet} from '../../model/Pet';
+import {markAllAsTouchedAndDirty} from '../../../shared/util/util';
 
 interface MainFormControls {
   pet: FormGroup<PetFormControls>;
@@ -35,7 +36,10 @@ export class PetUpdate {
 
   private readonly fillFormEffect = effect(() => {
     if (this.pet.hasValue()) {
-      this.petForm.patchValue({pet: this.pet.value() as Pet});
+      const pet = this.pet.value()!;
+      this.petForm.patchValue({
+        pet: {...pet, birthDate: pet.birthDate ? new Date(pet.birthDate) : null},
+      });
     }
     if (this.pet.error()) {
       this.messageService.add({
@@ -50,30 +54,27 @@ export class PetUpdate {
 
   async onSubmit() {
     if (this.petForm.invalid) {
-      this.petForm.markAllAsDirty();
-      this.petForm.markAllAsTouched();
+      markAllAsTouchedAndDirty(this.petForm);
       return
     }
-    if (this.petForm.valid) {
-      try {
-        const response = await firstValueFrom(
-          this.httpClient.put<Pet>(`/api/pets/${this.id()}`, this.petForm.value.pet)
-        );
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: `Pet with id ${response.id} updated`,
-          life: 3000,
-        });
-        this.router.navigate(['/pet']);
-      } catch {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Failed to update pet. Please try again.',
-          life: 3000,
-        });
-      }
+    try {
+      const response = await firstValueFrom(
+        this.httpClient.put<Pet>(`/api/pets/${this.id()}`, this.petForm.value.pet)
+      );
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: `Pet with id ${response.id} updated`,
+        life: 3000,
+      });
+      this.router.navigate(['/pet']);
+    } catch {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Failed to update pet. Please try again.',
+        life: 3000,
+      });
     }
   }
 
