@@ -8,6 +8,7 @@ import {Router} from '@angular/router';
 import {getVetFormGroup} from '../../model/VetFormGroup';
 import {VetForm, VetFormControls} from '../../components/vet-form/vet-form';
 import {Vet} from '../../model/Vet';
+import {markAllAsTouchedAndDirty} from '../../../shared/util/util';
 
 interface MainFormControls {
   vet: FormGroup<VetFormControls>;
@@ -32,26 +33,28 @@ export class VetCreate {
 
   async onSubmit() {
     this.formSubmitted.set(true);
-    if (this.vetForm.valid) {
-      try {
-        const response = await firstValueFrom(
-          this.httpClient.post<Vet>('/api/vets', this.vetForm.value.vet)
-        );
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: `Vet with id ${response} created`,
-          life: 3000,
-        });
-        this.router.navigate(['/vet']);
-      } catch {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Failed to create vet. Please try again.',
-          life: 3000,
-        });
-      }
+    if (this.vetForm.invalid) {
+      markAllAsTouchedAndDirty(this.vetForm);
+      return
+    }
+    try {
+      const response = await firstValueFrom(
+        this.httpClient.post<Vet>('/api/vets', this.vetForm.value.vet)
+      );
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: `Vet with id ${response} created`,
+        life: 3000,
+      });
+      this.router.navigate(['/vet']);
+    } catch {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Failed to create vet. Please try again.',
+        life: 3000,
+      });
     }
   }
 
