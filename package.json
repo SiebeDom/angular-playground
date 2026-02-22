@@ -10,7 +10,8 @@
     "test-one": "ng test  --include='**/pet-create/*.spec.ts'",
     "test-chr": "ng test --browsers=chromium",
     "test-chr-hdls": "ng test --browsers=chromiumHeadless",
-    "link-lib": "npm link angular-library-playground"
+    "link-lib": "npm link angular-library-playground",
+    "lint": "ng lint"
   },
   "prettier": {
     "printWidth": 100,
@@ -46,12 +47,15 @@
     "@angular/compiler-cli": "^21.1.2",
     "@tailwindcss/postcss": "^4.1.12",
     "@vitest/browser-playwright": "^4.0.18",
+    "angular-eslint": "21.2.0",
+    "eslint": "^9.39.2",
     "jsdom": "^27.1.0",
     "msw": "^2.12.7",
     "playwright": "^1.58.1",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.12",
     "typescript": "~5.9.2",
+    "typescript-eslint": "8.50.1",
     "vitest": "^4.0.8"
   },
   "msw": {
