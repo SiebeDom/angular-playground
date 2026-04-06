@@ -18,7 +18,8 @@ describe(PetCreate.name, () => {
     await page.getByPlaceholder('Name').fill('Test');
     await page.getByPlaceholder('Type').fill('Dog');
     await page.getByPlaceholder('Mood').fill('Happy');
-    await page.getByRole('combobox', {name: 'birthDate'}).fill('04/22/2026');
+    await page.getByRole('combobox', {name: 'birthDate'}).click();
+    await userEvent.keyboard('04/22/2026');
     await userEvent.keyboard('{Escape}');
     await page.getByRole('button', {name: 'Submit'}).first().click();
 
