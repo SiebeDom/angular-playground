@@ -1,37 +1,33 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {PetCreate} from './pet-create';
-import {ActivatedRoute} from '@angular/router';
+import {TestBed} from '@angular/core/testing';
+import {describe, expect, it, vi} from 'vitest';
+import {page, userEvent} from '@vitest/browser/context';
 import {of} from 'rxjs';
+import {PetCreate} from './pet-create';
 
-describe('PetCreate', () => {
-  let component: PetCreate;
-  let fixture: ComponentFixture<PetCreate>;
+describe(PetCreate.name, () => {
+  it('Create Pet', async () => {
+    const fixture = mountPetCreate();
+    const component = fixture.componentInstance;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [PetCreate],
-      providers: [
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            paramMap: of({get: () => 1}),
-          }
-        }
-      ]
-    }).compileComponents();
+    const postSpy = vi.spyOn(component.httpClient, 'post').mockReturnValue(of("1"));
+    const messageSpy = vi.spyOn(component.messageService, 'add');
+    const navigateSpy = vi.spyOn(component.router, 'navigate').mockResolvedValue(true);
 
-    fixture = TestBed.createComponent(PetCreate);
-    component = fixture.componentInstance;
-    await fixture.whenStable();
+    fixture.detectChanges();
+
+    await page.getByPlaceholder('Name').fill('Test');
+    await page.getByPlaceholder('Type').fill('Dog');
+    await page.getByPlaceholder('Mood').fill('Happy');
+    await page.getByRole('combobox', {name: 'birthDate'}).fill('04/22/2026');
+    await userEvent.keyboard('{Escape}');
+    await page.getByRole('button', {name: 'Submit'}).first().click();
+
+    expect(postSpy).toHaveBeenCalledWith('/api/pets', expect.objectContaining({name: 'Test'}));
+    expect(messageSpy).toHaveBeenCalledWith(expect.objectContaining({severity: 'success'}));
+    expect(navigateSpy).toHaveBeenCalledWith(['/pet']);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
-  it('should render title', async () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Pet create');
-  });
+  function mountPetCreate() {
+    return TestBed.createComponent(PetCreate);
+  }
 });

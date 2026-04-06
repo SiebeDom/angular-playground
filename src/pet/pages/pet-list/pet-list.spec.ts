@@ -24,8 +24,6 @@ describe(PetList.name, () => {
   });
 
   async function mountPetList() {
-    TestBed.configureTestingModule({});
-
     const httpMock = TestBed.inject(HttpTestingController);
     const fixture = TestBed.createComponent(PetList);
 

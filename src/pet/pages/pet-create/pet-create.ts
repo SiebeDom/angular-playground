@@ -37,7 +37,7 @@ export class PetCreate {
     }
     try {
       const response = await firstValueFrom(
-        this.httpClient.post<Pet>('/api/pets', this.petForm.value.pet)
+        this.httpClient.post<string>('/api/pets', this.petForm.value.pet)
       );
       this.messageService.add({
         severity: 'success',
