@@ -30,7 +30,7 @@ describe('PetList', () => {
   });
 
   it('should display a single pet name returned from the server', async () => {
-    const mockPets: Pet[] = [{id: '1', name: 'Buddy', type: 'Dog', mood: 'Happy'}];
+    const mockPets: Pet[] = [{id: '1', name: 'Buddy', type: 'Dog', mood: 'Happy', birthDate: '01-01-2020'}];
 
     httpMock.expectOne('/api/pets').flush(mockPets);
     await fixture.whenStable();
@@ -41,9 +41,9 @@ describe('PetList', () => {
 
   it('should display all pet names when multiple pets are returned', async () => {
     const mockPets: Pet[] = [
-      {id: '1', name: 'Rex', type: 'Dog', mood: 'Excited'},
-      {id: '2', name: 'Luna', type: 'Cat', mood: 'Lazy'},
-      {id: '3', name: 'Tweety', type: 'Bird', mood: 'Cheerful'},
+      {id: '1', name: 'Rex', type: 'Dog', mood: 'Excited', birthDate: '01-01-2020'},
+      {id: '2', name: 'Luna', type: 'Cat', mood: 'Lazy', birthDate: '01-01-2020'},
+      {id: '3', name: 'Tweety', type: 'Bird', mood: 'Cheerful', birthDate: '01-01-2020'},
     ];
 
     httpMock.expectOne('/api/pets').flush(mockPets);
@@ -58,8 +58,8 @@ describe('PetList', () => {
 
   it('should render one table row per pet', async () => {
     const mockPets: Pet[] = [
-      {id: '1', name: 'Buddy', type: 'Dog', mood: 'Happy'},
-      {id: '2', name: 'Whiskers', type: 'Cat', mood: 'Calm'},
+      {id: '1', name: 'Buddy', type: 'Dog', mood: 'Happy', birthDate: '01-01-2020'},
+      {id: '2', name: 'Whiskers', type: 'Cat', mood: 'Calm', birthDate: '01-01-2020'},
     ];
 
     httpMock.expectOne('/api/pets').flush(mockPets);

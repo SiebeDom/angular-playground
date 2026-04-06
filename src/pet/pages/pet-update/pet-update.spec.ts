@@ -1,39 +1,33 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-
+import {HttpTestingController} from '@angular/common/http/testing';
 import {PetUpdate} from './pet-update';
-import {ActivatedRoute} from '@angular/router';
-import {of} from 'rxjs';
-import {MessageService} from 'primeng/api';
+import {provideRouter} from '@angular/router';
 
 describe('CrudCreate', () => {
   let component: PetUpdate;
   let fixture: ComponentFixture<PetUpdate>;
+  let httpMock: HttpTestingController;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [PetUpdate],
-      providers: [
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            paramMap: of({get: () => 1}),
-          }
-        },
-        {
-          provide: MessageService
-        }
+      providers: [provideRouter([])],
+    }).compileComponents();
 
-      ]
-    })
-      .compileComponents();
-
+    httpMock = TestBed.inject(HttpTestingController);
     fixture = TestBed.createComponent(PetUpdate);
     component = fixture.componentInstance;
-    await fixture.whenStable();
-  })
-  ;
+    fixture.componentRef.setInput('id', '1');
+    fixture.detectChanges();
+  });
 
-  it('should create', () => {
+  afterEach(() => {
+    httpMock.verify();
+  });
+
+  it('should create', async () => {
+    httpMock.expectOne('/api/pets/1').flush({id: '1', name: 'Buddy', type: 'Dog', mood: 'Happy', birthDate: '01-01-2020'});
+    await fixture.whenStable();
     expect(component).toBeTruthy();
   });
 });
