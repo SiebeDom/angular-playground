@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test-one": "ng test  --include='**/pet-create/*.spec.ts'",
-    "test-chr": "ng test --browsers=chromium",
+    "test-chr": "ng test --watch --browsers=chromium",
     "test-chr-hdls": "ng test --browsers=chromiumHeadless",
     "link-lib": "npm link angular-library-playground",
     "lint": "ng lint"
