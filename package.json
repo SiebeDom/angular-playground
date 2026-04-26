@@ -10,6 +10,7 @@
     "test-one": "ng test  --include='**/pet-create/*.spec.ts'",
     "test-chr": "ng test --watch --browsers=chromium",
     "test-chr-hdls": "ng test --browsers=chromiumHeadless",
+    "playwright": "playwright test --project=chromium --ui",
     "link-lib": "npm link angular-library-playground",
     "lint": "ng lint"
   },
@@ -45,7 +46,9 @@
     "@angular/build": "^21.1.2",
     "@angular/cli": "^21.1.2",
     "@angular/compiler-cli": "^21.1.2",
+    "@playwright/test": "^1.59.1",
     "@tailwindcss/postcss": "^4.1.12",
+    "@types/node": "^25.5.2",
     "@vitest/browser-playwright": "^4.0.18",
     "angular-eslint": "21.2.0",
     "eslint": "^9.39.2",
